@@ -85,8 +85,60 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Donkeys: Are they Really all that Weird?',
+    date: 'Mar 11, 2020',
+    firstParagraph: `Donkeys are actually cool`,
+
+    secondParagraph: `Whoever says neigh`,
+
+    thirdParagraph: `Will ultimately pay`
   }
 ];
+function createComponent(articleTitle, articleDate, pOne, pTwo, pThree) {
+  
+  const article = document.createElement("div");
+  const title = document.createElement("h2");
+  const date = document.createElement("p");
+  const firstP = document.createElement("p");
+  const secondP = document.createElement("p");
+  const thirdP = document.createElement("p");
+  const expandSpan = document.createElement("span");
+
+  article.append(title);
+  article.append(date);
+  article.append(firstP);
+  article.append(secondP);
+  article.append(thirdP);
+  article.append(expandSpan);
+
+  article.classList.add("article");
+  date.classList.add("date");
+  expandSpan.classList.add("expandButton"); 
+
+  title.textContent = articleTitle;
+  date.textContent = articleDate;
+  firstP.textContent = pOne;
+  secondP.textContent = pTwo;
+  thirdP.textContent = pThree;
+
+  expandSpan.textContent = '\u25bc';
+
+  expandSpan.addEventListener("click", (event) => {
+    article.classList.toggle("article-open");
+
+  })
+
+  return article;
+
+}
+
+const articles = document.querySelector(".articles");
+
+data.forEach( info => {
+  articles.append(createComponent(info.title, info.date, info.firstParagraph, info.secondParagraph, info.thirdParagraph));
+})
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
@@ -101,7 +153,7 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+  Your function should take either an object as its one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
